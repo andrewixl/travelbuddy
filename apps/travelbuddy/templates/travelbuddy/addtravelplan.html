@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <h2>Hello {{request.session.first_name}} {{request.session.last_name}}</h2>
+  <form class="home" action="/user/home" method="post">
+    {% csrf_token %}
+    <input type="submit" name="home" value="Home">
+  <form class="logout" action="/logout" method="post">
+    {% csrf_token %}
+    <input type="submit" name="logout" value="Logout"><br><br>
+  </form>
+  {%if messages%}
+    {%for message in messages%}
+      <p>{{message}}</p>
+    {%endfor%}
+  {%endif%}
+    <h3 align='center'>Add a Trip</h3>
+  <form class="addtrip" action="addtriplogic" method="post" align='center'>
+    {% csrf_token %}
+    <input type="text" name="destination" placeholder="Add Name of Destination." size=30><br><br>
+    <input type="text" name="description" placeholder="Add Short Description of Trip." size=30><br><br>
+    Travel Date From:<input type="date" name="travelstartdate" size=30><br><br>
+    Travel Date To:<input type="date" name="travelenddate" size=30><br><br>
+    <input type="submit" name="addtrip" value="Add Trip"><br><br>
+  </form>
+</body>
+</html>

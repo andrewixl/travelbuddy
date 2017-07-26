@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+  </head>
+  <body>
+    {%if messages%}
+      {%for message in messages%}
+        <p>{{message}}</p>
+      {%endfor%}
+    {%endif%}
+    <h2>Hello {{request.session.first_name}} {{request.session.last_name}}</h2>
+    <form class="home" action="/user/home" method="post">
+      {% csrf_token %}
+      <input type="submit" name="home" value="Home">
+    <form class="logout" action="/logout" method="post">
+      {% csrf_token %}
+      <input type="submit" name="logout" value="Logout"><br><br>
+    </form>
+    <h3>{{plan.destination}}</h3>
+    <h4>&nbsp&nbsp&nbsp&nbsp Planned By: {{plan.owner.first_name}} {{plan.owner.last_name}}</h4>
+    <h4>&nbsp&nbsp&nbsp&nbsp Description: {{plan.description}}</h4>
+    <h4>&nbsp&nbsp&nbsp&nbsp Travel Date From: {{plan.travelstartdate}}</h4>
+    <h4>&nbsp&nbsp&nbsp&nbsp Travel Date To: {{plan.travelenddate}}</h4>
+
+    <h3>Other Users' Joining the Trip:</h3>
+    {%for user in user%}
+      <h4>{{user.first_name}} {{user.last_name}}</h4>
+    {%endfor%}
+  </body>
+</html>
